@@ -1,4 +1,5 @@
 import React, { Component, createContext, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { ToastContainer, toast } from 'react-toastify';
 import io from 'socket.io-client';
 import 'react-toastify/dist/ReactToastify.css';
@@ -46,6 +47,10 @@ class DataProvider extends Component {
       </DataContext.Provider>
     );
   }
+}
+
+DataProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }
 
 export const useDataContext = () => useContext(DataContext);
