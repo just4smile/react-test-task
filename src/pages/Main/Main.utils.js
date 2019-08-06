@@ -2,6 +2,8 @@ import moment from 'moment';
 
 import { MAX } from './Main.constants';
 
+const times = (length, fn) => Array.from({ length }, (v, index) => fn(index));
+
 export function getLineValues(values) {
   return values.map(({ value }) => value);
 }
@@ -17,14 +19,14 @@ function getRangeByIndex(index) {
 }
 
 function geBarCategories() {
-  return Array.from({ length: 20 }, (value, index) => {
+  return times(20, index => {
     const { start, end } = getRangeByIndex(index);
     return `${start} - ${end}`;
   });
 }
 
 export function getBarValues(values) {
-  const data = Array.from({ length: 20 }, () => 0);
+  const data = times(20, () => 0)
   values.forEach(({ value }) => {
     const index = Math.floor((value + MAX) / 10);
     data[index] = data[index] + 1;
